@@ -8,10 +8,9 @@ const About = () => {
                         Our <span className="text-amber-400">Story</span>
                     </h1>
                     <p className="text-lg md:text-2xl max-w-3xl mx-auto font-light">
-                        Crafting a world-class digital library experience since 2025.
+                        Building LibraryHub during our industrial attachment in 2025.
                     </p>
                 </div>
-                {/* Subtle Overlay */}
                 <div className="absolute inset-0 bg-black opacity-10"></div>
             </section>
 
@@ -22,7 +21,7 @@ const About = () => {
                         Why <span className="text-amber-400">LibraryHub</span> Exists
                     </h2>
                     <p className="text-gray-700 leading-relaxed text-lg mb-12">
-                        LibraryHub was born from a passion for knowledge and a desire to make it accessible to everyone. We blend cutting-edge technology with elegant design to create a platform where books and files are not just stored, but celebrated.
+                        LibraryHub was created by Saiful Islam and Md. Shahinur Islam during our industrial attachment at Brainstation 23. From March 1 to March 15, 2025, we worked together to design and develop a digital library platform that makes knowledge accessible and beautifully organized.
                     </p>
                 </div>
             </section>
@@ -39,8 +38,8 @@ const About = () => {
                         <div className="space-y-12">
                             <div className="relative flex items-center">
                                 <div className="w-1/2 pr-8 text-right">
-                                    <h3 className="text-xl font-semibold">2025</h3>
-                                    <p className="text-gray-200">Founded LibraryHub</p>
+                                    <h3 className="text-xl font-semibold">March 1, 2025</h3>
+                                    <p className="text-gray-200">Started Industrial Attachment</p>
                                 </div>
                                 <div className="w-1/2 pl-8">
                                     <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-amber-400 rounded-full"></div>
@@ -49,15 +48,15 @@ const About = () => {
                             <div className="relative flex items-center">
                                 <div className="w-1/2 pr-8"></div>
                                 <div className="w-1/2 pl-8 text-left">
-                                    <h3 className="text-xl font-semibold">2026</h3>
-                                    <p className="text-gray-200">Launched Public Access</p>
+                                    <h3 className="text-xl font-semibold">March 7, 2025</h3>
+                                    <p className="text-gray-200">Designed LibraryHub Concept</p>
                                 </div>
                                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-amber-400 rounded-full"></div>
                             </div>
                             <div className="relative flex items-center">
                                 <div className="w-1/2 pr-8 text-right">
-                                    <h3 className="text-xl font-semibold">2027</h3>
-                                    <p className="text-gray-200">Expanded to 1M+ Files</p>
+                                    <h3 className="text-xl font-semibold">March 15, 2025</h3>
+                                    <p className="text-gray-200">Completed LibraryHub Prototype</p>
                                 </div>
                                 <div className="w-1/2 pl-8">
                                     <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-amber-400 rounded-full"></div>
@@ -76,24 +75,17 @@ const About = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     <div className="bg-white rounded-2xl shadow-xl p-6 text-center transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
                         <div className="w-24 h-24 bg-teal-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                            JD
+                            SI
                         </div>
-                        <h3 className="text-xl font-semibold text-teal-900 mb-2">Jane Doe</h3>
-                        <p className="text-gray-600">Founder & CEO</p>
+                        <h3 className="text-xl font-semibold text-teal-900 mb-2">Saiful Islam</h3>
+                        <p className="text-gray-600">Co-Creator</p>
                     </div>
                     <div className="bg-white rounded-2xl shadow-xl p-6 text-center transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
                         <div className="w-24 h-24 bg-teal-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                            JS
+                            MSI
                         </div>
-                        <h3 className="text-xl font-semibold text-teal-900 mb-2">John Smith</h3>
-                        <p className="text-gray-600">Lead Developer</p>
-                    </div>
-                    <div className="bg-white rounded-2xl shadow-xl p-6 text-center transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-                        <div className="w-24 h-24 bg-teal-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                            EM
-                        </div>
-                        <h3 className="text-xl font-semibold text-teal-900 mb-2">Emily Miles</h3>
-                        <p className="text-gray-600">Community Manager</p>
+                        <h3 className="text-xl font-semibold text-teal-900 mb-2">Md. Shahinur Islam</h3>
+                        <p className="text-gray-600">Co-Creator</p>
                     </div>
                 </div>
             </section>

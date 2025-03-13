@@ -1,23 +1,51 @@
+// AllBooks.jsx
 import { useState } from "react";
+import useDownloadFile from "../../hooks/useDownloadFile";
+import useFetchFiles from "../../hooks/useFetchFiles";
+import useWordSearch from "../../hooks/useWordSearch";
+import useFilterAndSort from "../../hooks/useFilterAndSort";
+import Loading from "../../components/Loading";
+import BookCard from "../../components/BookCard";
+import ShowFile from "../../components/ShowFile";
+import Pagination from "../../components/Pagination";
 
 const AllBooks = () => {
     const [search, setSearch] = useState("");
+    const [wordSearch, setWordSearch] = useState("");
     const [category, setCategory] = useState("All");
+    const [sortByDownloads, setSortByDownloads] = useState("0");
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6; // Show 6 items per page
+    const downloadFile = useDownloadFile();
 
-    const dummyItems = [
-        { id: 1, title: "The Great Gatsby", type: "Book", category: "Fiction", img: "https://via.placeholder.com/150x200?text=Book" },
-        { id: 2, title: "Project Plan.pdf", type: "File", category: "Documents", img: "https://via.placeholder.com/150x200?text=PDF" },
-        { id: 3, title: "To Kill a Mockingbird", type: "Book", category: "Fiction", img: "https://via.placeholder.com/150x200?text=Book" },
-        { id: 4, title: "Notes.docx", type: "File", category: "Documents", img: "https://via.placeholder.com/150x200?text=Doc" },
-        { id: 5, title: "1984", type: "Book", category: "Dystopia", img: "https://via.placeholder.com/150x200?text=Book" },
-        { id: 6, title: "Report.xlsx", type: "File", category: "Spreadsheets", img: "https://via.placeholder.com/150x200?text=Excel" },
-    ];
+    const { items: fetchedItems, loading: fetchLoading } = useFetchFiles(sortByDownloads);
+    const { wordSearchItems, wordSearchLoading } = useWordSearch(wordSearch);
+    const baseItems = wordSearch ? wordSearchItems : fetchedItems;
+    const loading = fetchLoading || wordSearchLoading;
+    const filteredItems = useFilterAndSort(baseItems, search, category, sortByDownloads);
 
-    const filteredItems = dummyItems.filter(
-        (item) =>
-            (category === "All" || item.category === category) &&
-            item.title.toLowerCase().includes(search.toLowerCase())
-    );
+    const handleViewDetails = (fileId, bucket, filename) => {
+        setSelectedFile({ fileId, bucket, filename });
+    };
+
+    const closeModal = () => {
+        setSelectedFile(null);
+    };
+
+    const handleSortByDownloads = (e) => {
+        setSortByDownloads(e.target.value);
+        setCurrentPage(1); // Reset to first page when sorting changes
+    };
+
+    // Calculate the items to display based on the current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
     return (
         <div className="bg-gray-50 py-20 px-6">
@@ -26,7 +54,6 @@ const AllBooks = () => {
                     All Books & Files
                 </h2>
 
-                {/* Filters */}
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-10 space-y-4 sm:space-y-0 sm:space-x-4">
                     <input
                         type="text"
@@ -35,46 +62,77 @@ const AllBooks = () => {
                         onChange={(e) => setSearch(e.target.value)}
                         className="w-full sm:w-1/3 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600"
                     />
+                    <input
+                        type="text"
+                        placeholder="Search within files..."
+                        value={wordSearch}
+                        onChange={(e) => setWordSearch(e.target.value)}
+                        className="w-full sm:w-1/3 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600"
+                    />
                     <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         className="w-full sm:w-1/4 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600"
                     >
                         <option value="All">All Categories</option>
-                        <option value="Fiction">Fiction</option>
-                        <option value="Dystopia">Dystopia</option>
-                        <option value="Documents">Documents</option>
-                        <option value="Spreadsheets">Spreadsheets</option>
+                        <option value="pdf">PDF</option>
+                        <option value="image">Image</option>
+                        <option value="word">Word</option>
+                        <option value="json">JSON</option>
+                    </select>
+                    <select
+                        value={sortByDownloads}
+                        onChange={handleSortByDownloads}
+                        className="w-full sm:w-1/4 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600"
+                    >
+                        <option value="0">Sort by Downloads</option>
+                        <option value="5">5 Downloads</option>
+                        <option value="10">10 Downloads</option>
+                        <option value="15">15 Downloads</option>
+                        <option value="20">More than 15 Downloads</option>
                     </select>
                 </div>
 
-                {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {filteredItems.length > 0 ? (
-                        filteredItems.map((item) => (
-                            <div
-                                key={item.id}
-                                className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
-                            >
-                                <img
-                                    src={item.img}
-                                    alt={item.title}
-                                    className="w-full h-56 object-cover rounded-t-2xl"
-                                />
-                                <div className="p-6">
-                                    <h3 className="text-xl font-semibold text-teal-900 mb-2">{item.title}</h3>
-                                    <p className="text-sm text-gray-600 mb-4">{item.type} - {item.category}</p>
-                                    <button className="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition-colors duration-200">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p className="text-center text-gray-600 col-span-full">No items found.</p>
-                    )}
-                </div>
+                {loading ? (
+                    <Loading size="lg" color="teal-600" message="Fetching your collection..." />
+                ) : (
+                    <>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                            {currentItems.length > 0 ? (
+                                currentItems.map((item) => (
+                                    <BookCard
+                                        key={item.id}
+                                        item={item}
+                                        onViewDetails={handleViewDetails}
+                                        onDownload={downloadFile}
+                                    />
+                                ))
+                            ) : (
+                                <p className="text-center text-gray-600 col-span-full">No items found.</p>
+                            )}
+                        </div>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalItems={filteredItems.length}
+                            itemsPerPage={itemsPerPage}
+                            onPageChange={handlePageChange}
+                        />
+                    </>
+                )}
             </div>
+
+            {selectedFile && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-4 max-w-4xl w-full max-h-[90vh] overflow-auto">
+                        <ShowFile
+                            fileId={selectedFile.fileId}
+                            bucket={selectedFile.bucket}
+                            filename={selectedFile.filename}
+                            onBack={closeModal}
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

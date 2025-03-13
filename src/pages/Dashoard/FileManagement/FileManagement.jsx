@@ -10,7 +10,7 @@ const FileManagement = () => {
     const [uploadMessage, setUploadMessage] = useState("");
     const navigate = useNavigate();
 
-    const API_URL = "https://file-upload-api-livid.vercel.app";
+    const API_URL = "http://127.0.0.1:8000";
 
     // Fetch all files
     const fetchFiles = async () => {
