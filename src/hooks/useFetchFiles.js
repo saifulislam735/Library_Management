@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://file-upload-api-livid.vercel.app";
 const COVER_IMAGE_URL =
     "https://png.pngtree.com/png-clipart/20200727/original/pngtree-spring-element-abstract-geometric-book-cover-design-png-image_5370465.jpg";
 

@@ -15,7 +15,7 @@ const Dashboard = () => {
     const [uploadMessage, setUploadMessage] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
 
-    const API_URL = "http://127.0.0.1:8000";
+    const API_URL = "https://file-upload-api-livid.vercel.app";
 
     // Fetch top downloads
     const fetchTopDownloads = async (number) => {

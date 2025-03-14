@@ -8,7 +8,7 @@ const ViewFile = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const API_URL = "http://127.0.0.1:8000";
+    const API_URL = "https://file-upload-api-livid.vercel.app";
     const urlParams = new URLSearchParams(location.search);
     const fileId = urlParams.get("fileId");
     const bucket = urlParams.get("bucket");

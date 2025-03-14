@@ -3,7 +3,7 @@ const useDownloadFile = () => {
     const downloadFile = async (fileId, bucket, filename) => {
         try {
             const response = await fetch(
-                `http://127.0.0.1:8000/file/${fileId}/${bucket}?inline=true`
+                `https://file-upload-api-livid.vercel.app/file/${fileId}/${bucket}?inline=true`
             );
             if (!response.ok) throw new Error("Failed to fetch file");
             const blob = await response.blob();

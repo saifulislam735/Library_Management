@@ -5,7 +5,7 @@ const ShowFile = ({ fileId, bucket, filename = "Unnamed File", onBack }) => {
     const [content, setContent] = useState("Loading file content...");
     const [searchTerm, setSearchTerm] = useState("");
     const [originalContent, setOriginalContent] = useState("");
-    const API_URL = "http://127.0.0.1:8000";
+    const API_URL = "https://file-upload-api-livid.vercel.app";
 
     useEffect(() => {
         const fetchFileContent = async () => {
